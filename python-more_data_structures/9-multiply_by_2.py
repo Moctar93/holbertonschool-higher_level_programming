@@ -1,8 +1,6 @@
 #!/usr/bin/python3
-def max_integer(my_list=[]):
-    list_length = len(my_list)
-    if list_length == 0:
-        return
-
-    my_list.sort()
-    return my_list[-1]
+def multiply_by_2(a_dictionary):
+    new_dict = {}
+    for key, value in a_dictionary.items():
+        new_dict[key] = value * 2
+    return new_dict
