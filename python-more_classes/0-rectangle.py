@@ -2,7 +2,10 @@
 """
     Defines Rectangle
 """
+
+
 class Rectangle:
+
     """
         Rectangle class
     """
