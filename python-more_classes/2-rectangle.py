@@ -7,6 +7,9 @@
 
 
 class Rectangle:
+"""
+    Class Rectangle calculate area and perimeter
+"""
     def __init__(self, width=0, height=0):
         self.width = width
         self.height = height
