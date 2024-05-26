@@ -1,35 +1,16 @@
-#!/usr/bin/env python3
-"""
- Class file for ABC class.
-
-"""
+#!/usr/bin/python3
 
 
-from abc import ABC, abstractmethod
-""" Define the abstract class Animal"""
+class SwimMixin:
+    def swim(self):
+        print("The creature swims!")
 
 
-class Animal(ABC):
-
-    @abstractmethod
-    def sound(self):
-        pass
+class FlyMixin:
+    def fly(self):
+        print("The creature flies!")
 
 
-""" Define the Dog subclass"""
-
-
-class Dog(Animal):
-
-    def sound(self):
-        return "Bark"
-
-
-""" Define the Cat subclass"""
-
-
-class Cat(Animal):
-
-    def sound(self):
-        return "Meow"
-
+class Dragon(SwimMixin, FlyMixin):
+    def roar(self):
+        print("The dragon roars!")
