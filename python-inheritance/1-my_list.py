@@ -1,10 +1,20 @@
 #!/usr/bin/python3
 """
-    A subclass of list with a method to print the list in sorted order
-    Prints the list in ascending order.
+class MyList that inherits from list
+
 """
 
 
 class MyList(list):
+    """ Class that inherits the attributes references of class list
+
+    Args:
+        list: class list
+
+    """
+
     def print_sorted(self):
-        print(sorted(self))
+        """ Method that prints the sorted list """
+        l_sorted = self.copy()
+        l_sorted.sort()
+        print(l_sorted)
