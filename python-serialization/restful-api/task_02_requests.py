@@ -1,58 +1,30 @@
 #!/usr/bin/python3
-"""
-    Consuming and processing data from an API using Python
-"""
-
-
 import requests
 import csv
 
 
 def fetch_and_print_posts():
-    """
-    Récupère les publications depuis JSONPlaceholder et imprime leurs titres.
-    """
     response = requests.get('https://jsonplaceholder.typicode.com/posts')
-
-    # Imprime le code de statut
-    print(f"Code de statut : {response.status_code}")
+    print(f'Status Code: {response.status_code}')
 
     if response.status_code == 200:
-        # Analyse la réponse en JSON
-        posts = response.json()
+        data = response.json()
+        for dd in data:
+            print(dd['title'])
 
-        # Imprime les titres des publications
-        for post in posts:
-            print(post['title'])
-        else:
-            print("La requête a échoué")
 
-            def fetch_and_save_posts():
-"""
-    récupère les publications depuis JSONPlaceholder et 
-    les sauvegarde dans un fichier CSV.
-"""
+def fetch_and_save_posts():
     response = requests.get('https://jsonplaceholder.typicode.com/posts')
-
     if response.status_code == 200:
-        # Analyse la réponse en JSON
-        posts = response.json()
+        with open('posts.csv', 'w', newline='') as f:
+            writer = csv.writer(f)
+            fields = ['id', 'title', 'body']
 
-        # Prépare les données pour le CSV
-        posts_data = [{'id': post['id'], 'title': post['title'], 'body': pot
-            ['body']} for post in posts]
-
-        # Écrit les données dans un fichier CSV
-        with open('posts.csv', 'w', newline='', encoding='utf-8') as csvfile:
-            fieldnames = ['id', 'title', 'body']
-            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-
-            writer.writeheader()
-            for post in posts_data:
-                writer.writerow(post)
-            else:
-                print("La requête a échoué")
-
-                # Appelle les fonctions
-                fetch_and_print_posts()
-                fetch_and_save_posts()
+            writer.writerow(fields)
+            data = response.json()
+            for dd in data:
+                writer.writerow([
+                    dd['id'],
+                    dd['title'],
+                    dd['body']
+                ])
