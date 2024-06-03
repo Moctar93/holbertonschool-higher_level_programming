@@ -1,2 +1,2 @@
 FROM alpine:latest
-CMD echo "Hello, World!j"
+CMD echo "Hello, World!"
