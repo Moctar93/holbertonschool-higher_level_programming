@@ -1,3 +1,5 @@
+import os
+
 def generate_invitations(template, attendees):
     # Validation des entrées
     if not isinstance(template, str):
@@ -30,10 +32,6 @@ def generate_invitations(template, attendees):
         with open(output_filename, 'w') as output_file:
             output_file.write(output_content)
         print(f"Generated file: {output_filename}")
-
-        # Débogage: Lire et imprimer le contenu généré
-        with open(output_filename, 'r') as output_file:
-            print(output_file.read())
 
 # Exemple d'utilisation
 if __name__ == "__main__":
