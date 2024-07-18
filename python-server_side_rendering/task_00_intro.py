@@ -1,51 +1,53 @@
-import os
-
 def generate_invitations(template, attendees):
     # Validation des entrées
     if not isinstance(template, str):
-        print("Erreur : Le modèle doit être une chaîne de caractères.")
+        print("Error: Template should be a string.")
         return
     
     if not isinstance(attendees, list) or not all(isinstance(i, dict) for i in attendees):
-        print("Erreur : Les invités doivent être une liste de dictionnaires.")
+        print("Error: Attendees should be a list of dictionaries.")
         return
     
-    # Gérer les entrées vides
+    # Gestion des entrées vides
     if template.strip() == "":
-        print("Le modèle est vide, aucun fichier de sortie généré.")
+        print("Template is empty, no output files generated.")
         return
     
     if not attendees:
-        print("Aucune donnée fournie, aucun fichier de sortie généré.")
+        print("No data provided, no output files generated.")
         return
     
-    # Traiter chaque invité et générer des fichiers
+    # Traitement de chaque participant et génération des fichiers
     for idx, attendee in enumerate(attendees):
         output_content = template
         for placeholder in ["name", "event_title", "event_date", "event_location"]:
+            # Récupération de la valeur du participant, ou "N/A" si absent
             value = attendee.get(placeholder, "N/A")
-            if value is None:
-                value = "N/A"
             output_content = output_content.replace(f"{{{{{placeholder}}}}}", value)
         
+        # Nom du fichier de sortie
         output_filename = f"output_{idx + 1}.txt"
         with open(output_filename, 'w') as output_file:
             output_file.write(output_content)
-        print(f"Fichier généré : {output_filename}")
+        print(f"Generated file: {output_filename}")
+
+        # Débogage: Lire et imprimer le contenu généré
+        with open(output_filename, 'r') as output_file:
+            print(output_file.read())
 
 # Exemple d'utilisation
 if __name__ == "__main__":
-    # Lire le modèle à partir d'un fichier
+    # Lecture du template à partir d'un fichier
     with open('template.txt', 'r') as file:
         template_content = file.read()
 
-    # Liste des invités
+    # Liste des participants
     attendees = [
-        {"name": "Alice", "event_title": "Conférence Python", "event_date": "2023-07-15", "event_location": "New York"},
-        {"name": "Bob", "event_title": "Atelier de Science des Données", "event_date": "2023-08-20", "event_location": "San Francisco"},
-        {"name": "Charlie", "event_title": "Sommet de l'IA", "event_date": None, "event_location": "Boston"}
+        {"name": "Alice", "event_title": "Python Conference", "event_date": "2023-07-15", "event_location": "New York"},
+        {"name": "Bob", "event_title": "Data Science Workshop", "event_date": "2023-08-20", "event_location": "San Francisco"},
+        {"name": "Charlie", "event_title": "AI Summit", "event_date": None, "event_location": "Boston"}
     ]
 
-    # Appeler la fonction avec le modèle et la liste des invités
+    # Appel de la fonction avec le template et la liste des participants
     generate_invitations(template_content, attendees)
 
